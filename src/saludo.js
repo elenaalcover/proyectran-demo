@@ -1,4 +1,4 @@
-// Código de juguete: solo es la excusa para practicar con Claude Code.
+// Código de prueba: solo es la excusa para practicar con Claude Code.
 
 // Devuelve el mensaje de bienvenida para la persona indicada.
 function saludar(nombre) {
