@@ -54,7 +54,22 @@ proyectran-demo/
 | `.claude/skills/` | Habilidades reutilizables: el "cómo se hace" de una tarea (instrucciones y, si hace falta, scripts). Claude las usa cuando encajan, tú las lanzas con `/nombre` y los agentes las cargan. Aquí: `revisar`, la revisión previa a la PR. | `/revisar`. |
 | `.claude/agents/` | Subagentes: asistentes especializados con su propio contexto y herramientas limitadas. Aquí: `integrador`, que hace la PR. Carga la skill con `skills: [revisar]`: **la skill dice cómo se revisa, el agente lo hace aparte y decide si sube**. | "Sube los cambios" (o `@agent-integrador`). Si editas el fichero, abre una sesión nueva para que se cargue. |
 | Hooks (en `settings.json`) | Scripts que Claude Code ejecuta **siempre** en un momento concreto (no dependen de que Claude "se acuerde"). Aquí: `SessionStart`/`SessionEnd` para la memoria y `PreToolUse` como garantía antes del push. | `/hooks`. Ver más abajo. |
-| `.mcp.json` | Conecta Claude con herramientas externas. Aquí: n8n de DataGrowth (consultar y lanzar workflows de automatización). | `/mcp` para conectarte. Prueba: "¿qué workflows hay en n8n?". |
+| `.mcp.json` | Conecta Claude con herramientas externas. Aquí: n8n de DataGrowth (consultar y lanzar workflows de automatización). Se autentica con la variable de entorno `N8N_MCP_TOKEN` (ver más abajo). | `/mcp` para conectarte. Prueba: "¿qué workflows hay en n8n?". |
+
+### Conectar con n8n: la variable `N8N_MCP_TOKEN`
+
+`.mcp.json` no guarda el token: solo lo referencia (`Bearer ${N8N_MCP_TOKEN}`), así que el
+secreto nunca llega a git. Cada persona define la variable en su equipo:
+
+1. Consigue tu token de acceso MCP de n8n (en la configuración de n8n o pídeselo a quien lo administre).
+2. Defínelo como variable de entorno de usuario. En Windows:
+   ```powershell
+   setx N8N_MCP_TOKEN "tu-token"
+   ```
+3. Cierra y vuelve a abrir el editor o la terminal (las variables nuevas solo se ven en procesos nuevos)
+   y comprueba la conexión con `/mcp`.
+
+Si la variable no existe, `/mcp` mostrará el servidor `n8n` con error.
 
 ## Ideas para practicar
 

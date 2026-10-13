@@ -2,7 +2,8 @@
   "mcpServers": {
     "n8n": {
       "type": "http",
-      "url": "https://n8n.datagrowth.es/mcp-server/http"
+      "url": "https://n8n.datagrowth.es/mcp-server/http",
+      "headers": { "Authorization": "Bearer ${N8N_MCP_TOKEN}" }
     }
   }
 }
